@@ -44,7 +44,7 @@
       </div>
     </md-list-item>
     <md-divider></md-divider>
-    <md-list-item layout="column" ng-show="vm.currentuser.role=='admin'">
+    <md-list-item layout="column" ng-show="_settings.currentuser.role=='admin'">
       <h3>{{lng.Type}}</h3>
       <div layout="column">
         <md-input-container ng-repeat="type in types track by $index" style="">
@@ -65,7 +65,7 @@
         </md-button>
       </div>
     </md-list-item>
-    <md-divider ng-show="vm.currentuser.role=='admin'"></md-divider>
+    <md-divider ng-show="_settings.currentuser.role=='admin'"></md-divider>
     <md-list-item>
       <h3 flex>{{lng.Employees}}</h3>
       <md-input-container style="position:relative;top:10px;">
