@@ -34,10 +34,10 @@
         "username": "nikolett.schramm",
         "supervisor": "balazs.kallai",
         "organization": "production",
-        "password": "Nikolett2015",
         "role": "admin",
         "defaultlang": "hu",
-        "defaultbar": "default"
+        "defaultbar": "default",
+        "password": "Nikolett2015"
     },
     {
         "name": "Z\u00e1vodni L\u00e1szl\u00f3",
@@ -421,7 +421,7 @@
     },
     {
         "name": "Horv\u00e1th \u00c1brah\u00e1m Georgina",
-        "username": "georgina.horvath",
+        "username": "georgina.abraham",
         "supervisor": "balazs.kallai",
         "organization": "finance",
         "password": "Georgina2015",

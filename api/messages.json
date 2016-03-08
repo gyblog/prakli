@@ -1,3 +1,69 @@
 [
-
+    {
+        "title": "message",
+        "text": "subject",
+        "recipient": "laszlo.jencski",
+        "sender": "nikolett.schramm",
+        "senton": 1457365307326,
+        "read": 0,
+        "id": 1
+    },
+    {
+        "title": "message",
+        "recipient": "nikolett.schramm",
+        "text": "menjen",
+        "sender": "laszlo.jencski",
+        "senton": 1457365811170,
+        "read": 0,
+        "id": 2
+    },
+    {
+        "title": "message",
+        "recipient": "laszlo.jencski",
+        "text": "No...",
+        "sender": "nikolett.schramm",
+        "senton": 1457412821094,
+        "read": 0,
+        "id": 3
+    },
+    {
+        "title": "\u00daj Feladat Meghat\u00e1rozva",
+        "recipient": "nikolett.schramm",
+        "sender": "laszlo.jencski",
+        "senton": 1457421724220,
+        "taskreference": 3,
+        "text": "3. Feladat\n\n Probl\u00e9ma: mert tszt\n\n Akci\u00f3: az \u00fczeneter",
+        "read": 0,
+        "id": 4
+    },
+    {
+        "title": "3. Feladat Visszautas\u00edt\u00e1s",
+        "taskreference": 3,
+        "recipient": "laszlo.jencski",
+        "text": "Nem kell",
+        "sender": "nikolett.schramm",
+        "senton": 1457421912403,
+        "read": 0,
+        "id": 5
+    },
+    {
+        "title": "\u00daj Feladat Meghat\u00e1rozva",
+        "recipient": "laszlo.zavodni",
+        "sender": "laszlo.jencski",
+        "senton": 1457421942718,
+        "taskreference": 3,
+        "text": "3. Feladat\n\n Probl\u00e9ma:mert tszt\n\n Akci\u00f3:az \u00fczeneter",
+        "read": 0,
+        "id": 6
+    },
+    {
+        "title": "3. Feladat Visszautas\u00edt\u00e1s",
+        "taskreference": 3,
+        "recipient": "laszlo.jencski",
+        "text": "nem",
+        "sender": "laszlo.zavodni",
+        "senton": 1457422000724,
+        "read": 0,
+        "id": 7
+    }
 ]

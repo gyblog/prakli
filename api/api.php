@@ -22,4 +22,5 @@
   require_once('scripts/messages.php');
   require_once('scripts/users.php');
   require_once('scripts/projects.php');
+  require_once('scripts/types.php');
 ?>

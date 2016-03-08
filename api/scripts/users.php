@@ -40,7 +40,12 @@
         if($request->data){
           foreach($userList as $k=>$user){
             if($user->username == $request->data->username){
-              $userList[$k] = $request->data;
+              if(property_exists($request->data, "password")) {
+                $userList[$k] = $request->data;
+              } else {
+                $request->data->password = $user->password;
+                $userList[$k] = $request->data;
+              }
               file_put_contents('users.json', json_encode($userList, JSON_PRETTY_PRINT));
               echo '[{"success": "Data for `'.$request->data->username.'` Updated successfully!"}]';
             }
