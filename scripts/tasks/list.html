@@ -1,0 +1,44 @@
+<md-toolbar layout-padding class="md-whiteframe-1dp">
+  <h2 class="md-toolbar-tools" layout>
+          <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <strong flex>{{lng.Tasks}}</strong>
+          <div>
+          <md-input-container md-theme="kaLightGrey" style="position:relative;top:10px; color:white;">
+            <label style="color:rgba(255,255,255,.4)">Keresés a projekt névben</label>
+            <input type="text" ng-model="searchText">
+          </md-input-container>
+          </div>
+        </h2>
+</md-toolbar>
+<md-content layout>
+  <md-list flex="100" class="whiteBack" style="margin-top:0px;">
+    <md-list-item layout="row" layout-wrap style="background-color:#e7e7e7;color:#373737;" class="md-title">
+      <span flex-xs="100" flex-sm="100" flex-gt-sm="10" ng-click="sortType='title';sortReverse=!sortReverse" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{lng.Project}}</span>
+      <span flex-xs="100" flex-sm="100" flex-gt-sm ng-click="sortType='problem';sortReverse=!sortReverse" style="white-space:pre-wrap; color: rgb(3,63,136);padding:10px;">{{lng.Problem}}</span>
+      <span flex-xs="100" flex-sm="100" flex-gt-sm ng-click="sortType='action';sortReverse=!sortReverse" style="white-space:pre-wrap; color: rgb(63,182,3);padding: 10px;">{{lng.Action}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="20" style="text-align:center;overflow:hidden;text-overflow:ellipsis" ng-click="sortType='responsible';sortReverse=!sortReverse">{{lng.Responsible}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="text-align:center;" ng-click="sortType='duedate';sortReverse=!sortReverse"
+      flex-xs="30" flex-sm="20">{{lng.Duedate}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="" ng-click="sortType='status';sortReverse=!sortReverse">{{lng.Status}}</span>
+    </md-list-item>
+    <md-list-item ng-class="{'viewer':task.status=='Closed', 'participant': task.status=='Pending', 'rejected': task.status=='Rejected'}" layout="row" layout-wrap layout-align="center center" ng-repeat="task in _tasks.tasks | orderBy:sortType:sortReverse | filter: {'title':searchText} track by $index"
+    ui-sref="home.singleTask({'projectID':task.projectid, 'taskID':task.id})">
+      <div flex=" 100 " layout="row " layout-wrap layout-align="center center">
+        <span flex-xs="100 " flex-sm="100 " flex-gt-sm="10 " ng-click="sortType='title';sortReverse=!sortReverse" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis ">{{task.title}}</span>
+        <span flex-xs="100 " flex-sm="100 " flex-gt-sm style="white-space:pre-wrap; color: rgb(3,63,136);padding:10px; ">{{task.problem}}</span>
+        <span flex-xs="100 " flex-sm="100 " flex-gt-sm style="white-space:pre-wrap; color: rgb(63,182,3);padding:10px; ">{{task.action}}</span>
+        <span flex-xs="33 " flex-sm="33 " flex-gt-sm="20 " style="text-align:center;overflow:hidden;text-overflow:ellipsis ">{{(users | filter:{'username':task.responsible})[0].name}}</span>
+        <span flex-xs="33 " flex-sm="33 " flex-gt-sm="10 " style="text-align:center; ">{{task.duedate | date:'yyyy-MM-dd'}}</span>
+        <span flex-xs="33 " flex-sm="33 " flex-gt-sm="10 " style="line-height:20px;">
+          <i ng-if="task.status !='Closed'" style="position:absolute;margin:2px 0 0 0px;width:40px;text-align:center;line-height:36px;">{{lng[task.status]}}</i>
+          <md-progress-circular ng-if="task.status !='Closed'" md-theme="{{ _tasks.st[task.timer] }}" md-theme-watch class="md-primary" md-mode="determinate" md-diameter="40 " value="{{_tasks.taskStatuses[task.status]}} "></md-progress-circular>
+          <i ng-if="task.status=='Closed'" style="position:relative ">{{lng[task.status]}}<br>{{task.closedon | date: 'yyyy-MM-dd'}}</i>
+        </span>
+      </div>
+      <br><br>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+</md-content>

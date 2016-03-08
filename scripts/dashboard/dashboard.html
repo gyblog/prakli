@@ -1,0 +1,126 @@
+<md-toolbar layout-padding class="md-whiteframe-1dp">
+  <h2 class="md-toolbar-tools">
+          <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <strong>{{lng.Dashboard}}</strong>
+        </h2>
+</md-toolbar>
+<div layout layout-wrap>
+  <!-- PROJECTS -->
+  <md-card class="myCard">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="md-avatar-icon" class="material-icons">folder_open</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{lng.Owned}} {{lng.Projects}}</span>
+        <span class="md-subhead"></span>
+      </md-card-header-text>
+    </md-card-header>
+    <nvd3 style="width:100%; margin:0 auto; background-color:white;border-bottom:1px solid #e7e7e7;" options="_dash.projectChart.options"
+    data="_dash.projectChart.data"></nvd3>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline" layout><span flex>{{lng.Owned}} {{lng.Projects}}</span>
+        <!--<md-button class="md-icon-button" ng-show="projects.length > 0">{{projects.length}}</md-button>-->
+        </span>
+        <span class="md-subhead">{{lng.DueFirstFive}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-list-item class="secondary-button-padding" ng-repeat="project in projects | orderBy:'duedate' | filter:{'owner': _dash.currentuser.username, 'status':'!'+100} | limitTo:5 track by $index"
+        ui-sref="home.singleProject({projectID:project.id})">
+          <span flex>{{project.title}}</span>
+          <md-button class="md-icon-button">
+            <md-icon class="material-icons">pageview</md-icon>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="center center">
+      {{lng.List}} &nbsp;
+      <md-button class="md-fab md-primary" ui-sref="home.projects">
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>&nbsp;
+      <md-button class="md-fab md-warn" ng-click="_dash.newProject($event)">
+        <md-icon class="material-icons">control_point</md-icon>
+      </md-button> &nbsp; {{lng.New}}
+    </md-card-actions>
+    <md-card-content>
+    </md-card-content>
+  </md-card>
+
+  <!-- TASKS -->
+  <md-card class="myCard">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="md-avatar-icon" class="material-icons">dns</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{lng.Owned}} {{lng.Tasks}}</span>
+        <span class="md-subhead"></span>
+      </md-card-header-text>
+    </md-card-header>
+    <nvd3 style="width:100%; margin:0 auto; background-color:white;border-bottom:1px solid #e7e7e7;" options="_dash.taskChart.options"
+    data="_dash.taskChart.data"></nvd3>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline" layout><span flex>{{lng.Owned}} {{lng.Tasks}}</span>
+        <!--<md-button class="md-icon-button" ng-show="projects.length > 0">{{projects.length}}</md-button>-->
+        </span>
+        <span class="md-subhead">{{lng.DueFirstFiveTasks}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-divider></md-divider>
+        <md-subheader>{{lng.AllTasks}}</md-subheader>
+        <md-list-item class="secondary-button-padding" ng-repeat="alls in _dash.allTasks | orderBy:'duedate' | filter:{'status': '!'+'Closed', 'responsible':_dash.currentuser.username} | limitTo:5 track by $index" ui-sref="home.singleTask({'projectID':alls.projectid, 'taskID':alls.id})">
+          <span flex style="line-height:20px;border-bottom:1px solid rgb(230,231,232)">
+            <span>{{$index+1}}. {{alls.problem}}</span><br>
+            <i style="font-size:0.8em">{{ (users | filter: {'username':alls.responsible})[0].name }}</i><br>
+            <sup style="font-size:0.8em;">{{lng.Duedate}}: {{alls.duedate | date: 'yyyy-MM-dd'}}</sup>
+          </span>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="center center">
+      {{lng.List}} &nbsp;
+      <md-button class="md-fab md-primary" ui-sref="home.tasks">
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>&nbsp;
+    </md-card-actions>
+    <md-card-content>
+    </md-card-content>
+  </md-card>
+
+  <!-- MESSAGES -->
+   <md-card class="myCard" style="width:800px">
+     <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline" layout><span flex>{{lng.Owned}} {{lng.Messages}}</span>
+        <md-button class="md-icon-button" ng-show="messages.length > 0">{{(messages | filter:{'read':0}).length}}</md-button>
+        </span>
+        <span class="md-subhead">{{lng.UnreadMessages}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <md-list>
+        <md-list-item class="secondary-button-padding" ng-repeat="message in messages | orderBy:'senton' | filter:{'recipient': _dash.currentuser.username, 'read':0} | limitTo:5 track by $index"
+        ui-sref="home.messages">
+          <span flex style="line-height:20px;border-bottom:1px solid rgb(230,231,232);padding-top:10px;">
+            <span class="{{message.title.indexOf('Visszautasítás') > -1 || message.title.indexOf('Reject') > -1 ? 'red':'blue'}}">{{message.title}}</span><br>
+            <i style="font-size:0.8em">{{ (users | filter: {'username':message.sender})[0].name }}</i><br>
+            <sup style="font-size:0.8em;text-align:right;">{{message.senton | date: 'yyyy-MM-dd HH:mm'}}</sup>
+            <p style="white-space:pre-wrap"><b>{{message.text}}<b></p>
+          </span>
+          <md-button class="md-icon-button">
+            <md-icon class="material-icons">message</md-icon>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+   </md-card>
+</div>

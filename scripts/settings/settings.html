@@ -1,0 +1,51 @@
+<md-toolbar layout-padding class="md-whiteframe-1dp">
+  <h2 class="md-toolbar-tools" layout>
+          <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <strong flex>{{lng.Settings}}</strong>
+          <div>
+          </div>
+        </h2>
+</md-toolbar>
+<md-content>
+
+  <md-list ng-show="(users | filter:{'supervisor':_settings.currentuser.username}).length > 0">
+    <md-list-item layout="column">
+      <h3>{{lng.Owned}} {{lng.Password}} {{lng.EDIT}}</h3>
+      <div layout="row">
+      <md-input-container style="position:relative;top:10px;">
+        <label>{{lng.New}} {{lng.Password}}</label>
+        <input type="password" ng-model="_settings.newpass">
+      </md-input-container>
+      <md-input-container style="position:relative;top:10px;">
+        <label>{{lng.New}} {{lng.Password}} {{lng.Again}}</label>
+        <input type="password" ng-model="_settings.newpass2">
+      </md-input-container>
+      <md-button ng-click="_settings.saveNewPass()" ng-disabled="(!_settings.newpass || !_settings.newpass2) || (_settings.newpass != _settings.newpass2)">
+        <md-icon class="material-icons">save</md-icon>
+        {{lng.SAVE}}
+      </md-button>
+      </div>
+      <p ng-show="_settings.message">{{_settings.message}}</p>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item>
+      <h3 flex>{{lng.Employees}}</h3>
+      <md-input-container style="position:relative;top:10px;">
+            <label>Keresés név szerint</label>
+            <input type="text" ng-model="searchText">
+          </md-input-container>
+    </md-list-item>
+    <md-list-item layout="row" ng-repeat="emp in users | filter:{'supervisor': _settings.currentuser.username, 'name': searchText} | orderBy:'name' track by $index" style="border-bottom:1px solid rgb(230,231,232);font-size:.8em;">
+      <div flex>
+        <h3>{{emp.name}}</h3>
+        <p>{{emp.organization | uppercase}}</p>
+      </div>
+      <div flex>
+        {{lng.Projects}}: <b>{{_settings.projectCount(emp.username)}}</b><br>
+        {{lng.Tasks}}: <b>{{_settings.taskCount(emp.username)}}</b>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-content>

@@ -1,0 +1,59 @@
+<md-toolbar layout-padding class="md-whiteframe-1dp">
+  <h2 class="md-toolbar-tools" layout>
+          <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <strong flex>{{lng.Projects}}</strong>
+          <div>
+          <md-input-container md-theme="kaLightGrey" style="position:relative;top:10px; color:white;">
+            <label style="color:rgba(255,255,255,.4)">Keresés a címben</label>
+            <input type="text" ng-model="searchText">
+          </md-input-container>
+          </div>
+        </h2>
+</md-toolbar>
+<md-list flex class="whiteBack" style="margin-top:-10px;">
+  <md-list-item layout="row" style="background-color:#373737;color:white;" class="md-title">
+    <span flex ng-click="sortType='title';sortReverse=!sortReverse">{{lng.Title}}</span>
+    <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{lng.Description}}</span>
+    <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{lng.Owner}}</span>
+    <span flex="10" ng-click="sortType='duedate';sortReverse=!sortReverse" flex-xs="30" flex-sm="20">{{lng.Duedate}}</span>
+    <span flex="5" ng-click="sortType='status';sortReverse=!sortReverse">{{lng.Status}}</span>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-subheader>{{lng.Owned}}</md-subheader>
+  <md-list-item ng-repeat="project in projects | orderBy:sortType:sortReverse | filter:{'owner':_projects.currentuser.username, 'title':searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
+    <span flex class="md-primary md-block">{{project.title}}</span>
+    <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
+    <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
+    <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
+    <span flex="5">
+               <i style="position:absolute;margin:2px 0 0 -2px;width:40px;text-align:center;">{{project.status}}</i>
+               <md-progress-circular class="md-primary" md-mode="determinate" md-diameter="40" value="{{project.status}}"></md-progress-circular>
+            </span>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-subheader>{{lng.Participant}}</md-subheader>
+  <md-list-item class="participant" ng-repeat="project in _projects.participant() | filter:{'title': searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
+    <span flex class="md-primary md-block">{{project.title}}</span>
+    <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
+    <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
+    <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
+    <span flex="5">
+               <i style="position:absolute;margin:2px 0 0 -2px;width:40px;text-align:center;">{{project.status}}</i>
+               <md-progress-circular class="md-primary" md-mode="determinate" md-diameter="40" value="{{project.status}}"></md-progress-circular>
+            </span>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-subheader>{{lng.Attendee}}</md-subheader>
+  <md-list-item class="viewer" ng-repeat="project in _projects.viewer() | filter:{'title': searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
+    <span flex class="md-primary md-block">{{project.title}}</span>
+    <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
+    <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
+    <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
+    <span flex="5">
+               <i style="position:absolute;margin:2px 0 0 -2px;width:40px;text-align:center;">{{project.status}}</i>
+               <md-progress-circular class="md-primary" md-mode="determinate" md-diameter="40" value="{{project.status}}"></md-progress-circular>
+            </span>
+  </md-list-item>
+</md-list>

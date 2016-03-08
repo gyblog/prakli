@@ -1,0 +1,61 @@
+<md-toolbar>
+  <h2 class="md-toolbar-tools">
+    <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+      <md-icon class="material-icons">menu</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" onClick="history.back()" hide-gt-md>
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <strong flex style="font-size:28px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{_singleTask.task.id}}. {{ _singleTask.task.active==1 ? lng.Active : lng.Inactive}} {{lng.Task}}</strong>
+  </h2>
+</md-toolbar>
+<md-content layout layout-wrap layout-align="center center">
+  <div flex-gt-sm="70" flex-xs="100" flex-sm="60" layout-padding>
+    <dl>
+      <dt>{{lng.Project}}</dt>
+      <dd>{{_singleTask.task.title}}</dd>
+      <dt>{{lng.Problem}}</dt>
+      <dd>{{_singleTask.task.problem}}</dd>
+      <dt>{{lng.Action}}</dt>
+      <dd>{{_singleTask.task.action}}</dd>
+      <dt>{{lng.Duedate}}</dt>
+      <dd>{{_singleTask.task.duedate | date:'yyyy-MM-dd'}}</dd>
+      <dt>{{lng.Owner}}</dt>
+      <dd>{{(users | filter:{'username':_singleTask.thisProject.owner})[0].name}}</dd>
+      <dt>{{lng.Responsible}}</dt>
+      <dd>{{(users | filter:{'username':_singleTask.task.responsible})[0].name}}</dd>
+      <dt>{{lng.Affecting}}</dt>
+      <dd>{{_singleTask.task.affecting}}</dd>
+    </dl>
+  </div>
+  <div flex-gt-sm="30" flex-xs="100" flex-sm="40" layout-padding layout-align="center center" style="width:200px;margin:0 auto">
+    <md-button ng-click="_singleTask.task.status = _singleTask.advanceStatus(_singleTask.task.status);">
+      <md-progress-circular md-theme-watch md-theme="{{_singleTask.st[_singleTask.timer]}}" class="md-primary" md-mode="determinate"
+      md-diameter="200" value="{{_singleTask.statuses[_singleTask.task.status]}}"></md-progress-circular>
+      <i style="position:absolute;margin:-120px 0 0 -95px;font-size:2em;width:200px;text-align:center;z-index:100;">{{lng[_singleTask.task.status]}} <br><small style="font-size:10pt">{{_singleTask.task.closedon | date:'yyyy-MM-dd'}}</small></i>
+    </md-button>
+  </div>
+  <div flex="100" layout layout-align="center center">
+    <md-button class="md-accent" ng-click="_singleTask.cancel()">
+      <md-icon class="material-icon">close</md-icon> {{lng.Cancel}}</md-button>
+    <md-button class="md-primary" ng-click="_singleTask.save(_singleTask.thisProject)" ng-show="_singleTask.task.responsible == _singleTask.currentuser.username || (_singleTask.thisProject.owner == _singleTask.currentuser.username && (_singleTask.task.status == 'A' || _singleTask.task.status=='Closed' || _singleTask.task.status=='Rejected'))">
+      <md-icon class="material-icon">save</md-icon> {{lng.SAVE}}</md-button>
+    <md-button class="md-primary" ng-click="_singleTask.edit($event, _singleTask.task)" ng-show="(_singleTask.thisProject.owner == _singleTask.currentuser.username && (_singleTask.task.status != 'Pending' || _singleTask.task.status != 'Rejected'))">
+      <md-icon class="material-icon">edit</md-icon> {{lng.EDIT}}</md-button>
+    <md-button class="md-warn" ng-click="_singleTask.newMessage($event, _singleTask.task)" ng-show="_singleTask.task.responsible == _singleTask.currentuser.username && _singleTask.task.status == 'Pending'">
+      <md-icon class="material-icon">assignment_return</md-icon> {{lng.Reject}}</md-button>
+  </div>
+
+  <div flex="80" style="color:rgb(128,130,133);margin-bottom:20px;">
+  <b ng-show="_singleTask.task.modified">{{lng.Modifications}}:</b>
+  <div flex="100" layout="column" ng-show="_singleTask.task.modified" style="font-size:0.8em;line-height:20px;border-bottom: 1px solid rgb(200,200,200); padding-left: 20px;"
+  ng-repeat="mod in _singleTask.task.modified | orderBy:'on':true track by $index">
+    <i>{{lng.Modifiedon}}: {{mod.on | date: 'yyyy-MM-dd HH:mm'}}</i>
+    <span style="padding-left:20px"> {{lng.From}}:
+            <br> {{lng.Responsible}}: <b>{{mod.from.responsible}}</b>
+            <br> {{lng.Duedate}}: <b>{{mod.from.duedate | date: 'yyyy-MM-dd'}}</b>
+            <br> {{lng.Status}}: <b>{{mod.from.status}}</b>
+          </span>
+  </div>
+  </div>
+</md-content>

@@ -1,0 +1,40 @@
+<md-dialog ng-cloak aria-label="New Project" style="max-width:500px;width:80%">
+  <from>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><span>{{tag}}</span></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column">
+        <md-input-container aria-label="Title"><label>{{lng.Title}}</label><input type="text" ng-model="project.title" class="md-block"></md-input-container>
+        <md-input-container aria-label="Description"><label>{{lng.Description}}</label><textarea columns="1" md-maxlength="150" rows="5" ng-model="project.description" class="md-block"></textarea></md-input-container>
+        <br>
+        <md-datepicker flex ng-model="project.duedate" md-placeholder="Enter date" md-date-filter="onlyWeekdays" md-min-date="minDate"></md-datepicker>
+        <br>
+        <md-input-container style="margin-right: 10px;" class="md-block">
+          <label>{{lng.Type}}</label>
+          <md-select ng-model="project.type"  aria-label="Type">
+            <md-option ng-repeat="type in types" value="{{type}}">{{type}}</md-option>
+          </md-select>
+        </md-input-container>
+        <br>
+        <md-input-container style="margin-right: 10px;" class="md-block">
+          <label>{{lng.GrantAdditionalAccess}}</label>
+          <md-select ng-model="project.attendees" multiple="true" aria-label="Additional Access">
+            <md-option ng-repeat="user in users" value="{{user.username}}">{{user.name}}</md-option>
+          </md-select>
+          <p class="md-caption">{{lng.GrantAdditionalAccessText}}</p>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-disabled="!project.title || !project.duedate" ng-click="answer(project)">{{lng.SAVE}}</md-button>
+    </md-dialog-actions>
+  </from>
+</md-dialog>

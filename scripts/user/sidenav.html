@@ -1,0 +1,51 @@
+<md-sidenav ui-view="sideNav" class="md-sidenav-left md-whiteframe-2dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+
+  <md-toolbar>
+    <img src="styles/cpanel.png" style="margin:20px auto;max-width:200px" alt=" http://www.wallpaperfx.com">
+    <div class="md-toolbar-tools">
+      <h2 flex style="text-align: center">
+            PrAkLi<br>
+            <small style="font-size:.6em">Projekt Akció listák</small>
+            <br><br>
+          </h2>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-list>
+      <md-subheader class="md-primary">{{lng.Navigation}}</md-subheader>
+      <md-list-item ui-sref="home.dashboard" ng-click="toggleSidenav()">
+        <md-icon class="material-icons">dashboard</md-icon>
+        <p>{{lng.Dashboard}}</p>
+      </md-list-item>
+      <md-list-item ui-sref="home.projects" class="secondary-button-padding" ng-click="toggleSidenav()">
+        <md-icon class="material-icons">folder_open</md-icon>
+        <p>{{lng.Projects}}</p>
+        <md-button class="md-secondary md-icon-button" ng-click="_user.newProject($event)">
+          <md-icon class="material-icons">control_point</md-icon>
+        </md-button>
+      </md-list-item>
+      <md-list-item ui-sref="home.tasks" ng-click="toggleSidenav()">
+        <md-icon class="material-icons">dns</md-icon>
+        <p>{{lng.Tasks}}</p>
+      </md-list-item>
+      <md-list-item ui-sref="home.messages" class="secondary-button-padding" ng-click="toggleSidenav()">
+        <md-icon class="material-icons">message</md-icon>
+        <p>{{lng.Messages}}</p>
+        <md-button class="md-secondary md-icon-button" ng-click="toggleSidenav()">
+          <md-icon class="material-icons" ng-click="_user.newMessage($event)">control_point</md-icon>
+        </md-button>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item ui-sref="home.settings" ng-click="toggleSidenav()">
+        <md-icon class="material-icons">perm_data_setting</md-icon>
+        <p>{{lng.Settings}}</p>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item ng-click="_user.logout()">
+        <md-icon class="material-icons">lock</md-icon>
+        <p style="line-height:20px">{{lng.Logout}}<br>{{_user.user.name}}</p>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-sidenav>
+<md-content flex layout-align="top center" ui-view="content" class="view"></md-content>

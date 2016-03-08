@@ -1,0 +1,92 @@
+<md-toolbar layout-padding class="md-whiteframe-1dp">
+  <h2 class="md-toolbar-tools">
+          <md-button class="md-icon-button" ng-click="toggleSidenav()" hide-gt-md>
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" onClick="history.back()" hide-gt-md>
+            <md-icon class="material-icons">arrow_back</md-icon>
+          </md-button>
+          <strong flex style="font-size:28px;">{{_singleProject.pr.title}}</strong>
+        </h2>
+</md-toolbar>
+<md-content layout layout-wrap>
+  <div flex-gt-sm="50" flex-xs="100" flex-sm="100" layout-padding>
+    <dl>
+      <dt>{{lng.Description}}</dt>
+      <dd>{{_singleProject.pr.description}}</dd>
+      <dt>{{lng.Duedate}}</dt>
+      <dd>{{_singleProject.pr.duedate | date:'yyyy-MM-dd'}}</dd>
+      <dt>{{lng.Type}}</dt>
+      <dd>{{_singleProject.pr.type}}</dd>
+      <dt>{{lng.Owner}}</dt>
+      <dd>{{(users | filter:{'username':_singleProject.pr.owner})[0].name}}</dd>
+    </dl>
+    <md-button class="md-fab md-primary" ng-click="_singleProject.editProject($event, _singleProject.pr)" ng-show="_singleProject.pr.owner == _singleProject.currentuser.username">
+      <md-icon class="material-icon">edit</md-icon>
+    </md-button>
+
+  </div>
+  <div flex-gt-sm="50" flex-xs="100" flex-sm="100" layout-padding>
+    <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" class="material-icons">dns</md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{lng.Tasks}}</span>
+          <span class="md-subhead">{{lng.TasksInProject}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <nvd3 style="width:100%; margin:0 auto;" options="_singleProject.projectChart.options" data="_singleProject.projectChart.data">></nvd3>
+      <md-card-title layout="column">
+        <span class="md-headline">
+          <span flex>{{lng.Status}} {{lng.Details}}</span>
+        </span>
+        <span class="md-subhead"></span>
+      </md-card-title>
+    </md-card>
+  </div>
+  <div flex="100" layout-padding>
+    <md-button class="md-fab md-primary" ng-click="_singleProject.newTask($event)" ng-show="_singleProject.pr.owner == _singleProject.currentuser.username">
+      <md-icon class="material-icon">control_point</md-icon>
+    </md-button>
+    <md-button class="" ng-click="_singleProject.showOnlyActive()">
+      <md-icon class="material-icon">filter_list</md-icon> {{lng.ShowInactive}}</md-button>
+  </div>
+  <md-list flex="100" class="whiteBack" style="margin-top:-10px;">
+    <md-list-item layout="row" layout-wrap style="background-color:#e7e7e7;color:#373737;" class="md-title">
+      <span flex-xs="100" flex-sm="100" flex-gt-sm ng-click="sortType='problem';sortReverse=!sortReverse" style="white-space:pre-wrap; color: rgb(3,63,136);padding:10px;">{{lng.Problem}}</span>
+      <span flex-xs="100" flex-sm="100" flex-gt-sm ng-click="sortType='action';sortReverse=!sortReverse" style="white-space:pre-wrap; color: rgb(63,182,3);padding: 10px;">{{lng.Action}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="20" style="text-align:center;overflow:hidden;text-overflow:ellipsis" ng-click="sortType='responsible';sortReverse=!sortReverse">{{lng.Responsible}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="text-align:center;" ng-click="sortType='duedate';sortReverse=!sortReverse"
+      flex-xs="30" flex-sm="20">{{lng.Duedate}}</span>
+      <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="" ng-click="sortType='status';sortReverse=!sortReverse">{{lng.Status}}</span>
+    </md-list-item>
+    <md-list-item layout="column" ng-class="{'viewer':task.status=='Closed', 'participant':task.status=='Pending', 'rejected': task.status=='Rejected'}"
+    style="border-bottom:1px solid #e7e7e7;" ng-repeat="task in _singleProject.pr.tasks | filter:_singleProject.act | orderBy:sortType:sortReverse track by $index"
+    ng-class="{'notA': task.active == 0}" ui-sref="home.singleTask({projectID:_singleProject.pr.id, taskID: task.id})">
+      <div flex="100" layout="row" layout-wrap layout-align="center center">
+        <span flex-xs="100" flex-sm="100" flex-gt-sm style="white-space:pre-wrap; color: rgb(3,63,136);padding:10px;">{{task.problem}}</span>
+        <span flex-xs="100" flex-sm="100" flex-gt-sm style="white-space:pre-wrap; color: rgb(63,182,3);padding:10px;">{{task.action}}</span>
+        <span flex-xs="33" flex-sm="33" flex-gt-sm="20" style="text-align:center;overflow:hidden;text-overflow:ellipsis">{{(users | filter:{'username':task.responsible})[0].name}}</span>
+        <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="text-align:center;">{{task.duedate | date:'yyyy-MM-dd'}}</span>
+        <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="line-height:20px;">
+          <i ng-if="task.status != 'Closed'" style="position:absolute;margin:2px 0 0 0;width:40px;text-align:center; line-height:36px;">{{lng[task.status]}}</i>
+          <md-progress-circular ng-if="task.status != 'Closed'" class="md-primary" md-theme-watch md-theme="{{_singleProject.setStatus(task)}}" md-mode="determinate" md-diameter="40" value="{{_singleProject.taskStatuses[task.status]}}"></md-progress-circular>
+          <i ng-if="task.status == 'Closed'" style="position:relative;">{{lng[task.status]}}<br>{{task.closedon | date: 'yyyy-MM-dd'}}</i>
+        </span>
+        <b flex="100" ng-show="!_singleProject.act.active && task.modified">{{lng.Modifications}}:</b>
+        <div flex="100" layout="column" ng-show="!_singleProject.act.active && task.modified" style="font-size:0.8em;line-height:20px;border-bottom: 1px solid rgb(200,200,200);" ng-repeat="mod in task.modified track by $index">
+          <i>{{$index + 1}}. {{lng.Modifiedon}}: {{mod.on | date: 'yyyy-MM-dd HH:mm'}}</i>
+          <span> {{lng.From}}:
+            <br> {{lng.Responsible}}: <b>{{mod.from.responsible}}</b>
+            <br> {{lng.Duedate}}: <b>{{mod.from.duedate | date: 'yyyy-MM-dd'}}</b>
+            <br> {{lng.Status}}: <b>{{mod.from.status}}</b>
+          </span>
+        </div>
+      </div>
+
+    </md-list-item>
+
+  </md-list>
+</md-content>

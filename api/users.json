@@ -1,0 +1,542 @@
+[
+    {
+        "name": "K\u00e1llai Bal\u00e1zs",
+        "username": "balazs.kallai",
+        "supervisor": "",
+        "organization": "operations",
+        "password": "Balazs2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Tarj\u00e1nyi Erzsebet",
+        "username": "erzsebet.tarjani",
+        "supervisor": "balazs.kallai",
+        "organization": "purchasing",
+        "password": "Erzsebet2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Vaizern\u00e9 Moln\u00e1r E.",
+        "username": "e.vaizerne",
+        "supervisor": "balazs.kallai",
+        "organization": "purchasing",
+        "password": "E2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Schramm Nikolett",
+        "username": "nikolett.schramm",
+        "supervisor": "balazs.kallai",
+        "organization": "production",
+        "password": "Nikolett2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "default"
+    },
+    {
+        "name": "Z\u00e1vodni L\u00e1szl\u00f3",
+        "username": "laszlo.zavodni",
+        "supervisor": "nikolett.schramm",
+        "organization": "production",
+        "password": "Laszlo2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Horv\u00e1th S\u00e1ndor",
+        "username": "sandor.horvath",
+        "supervisor": "nikolett.schramm",
+        "organization": "production",
+        "password": "Sandor2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "\u0150ri Zolt\u00e1n",
+        "username": "zoltan.ori",
+        "supervisor": "nikolett.schramm",
+        "organization": "production",
+        "password": "Zoltan2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Jencski L\u00e1szl\u00f3",
+        "username": "laszlo.jencski",
+        "supervisor": "nikolett.schramm",
+        "organization": "production",
+        "password": "Laszlo2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Kiss P\u00e9ter",
+        "username": "peter.kiss",
+        "supervisor": "balazs.kallai",
+        "organization": "engineering",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue",
+        "password": "Peter2015"
+    },
+    {
+        "name": "Cattelan Angelo",
+        "username": "angelo.cattelan",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Angelo2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Andok Szabolcs",
+        "username": "szabolcs.andok",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Szabolcs2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Devecseri P\u00e9ter",
+        "username": "peter.devecseri",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Peter2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Lanter Rudolf",
+        "username": "rudolf.lanter",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Rudolf2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "K\u0151v\u00e1ri 0e9ter",
+        "username": "peter.kovari",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Peter2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "R\u00e1cz Andr\u00e1s",
+        "username": "andras.racz",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Andras2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Babcs\u00e1nyi Tibor",
+        "username": "tibor.babcsanyi",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Tibor2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Fabulya J\u00e1nos",
+        "username": "janos.fabulya",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Janos2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "G\u00f3cza G\u00e1bor",
+        "username": "gabor.gocza",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Gabor2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "N\u00e9meth Zolt\u00e1n",
+        "username": "zoltan.nemeth",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Zoltan2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Lacher Tam\u00e1s",
+        "username": "tamas.lacher",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Tamas2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Papp Anik\u00f3",
+        "username": "aniko.papp",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Aniko2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Erd\u0151sn\u00e9 Pet\u0151 \u00c9va",
+        "username": "eva.erdosne",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Eva2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Nagy Szabolcs",
+        "username": "szabolcs.nagy",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Szabolcs2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Nemes Erzs\u00e9bet",
+        "username": "erzsebet.nemes",
+        "supervisor": "peter.kiss",
+        "organization": "engineering",
+        "password": "Erzsebet2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Schreiner L\u00e1szl\u00f3",
+        "username": "laszlo.schreiner",
+        "supervisor": "balazs.kallai",
+        "organization": "QA-HSE",
+        "password": "Laszlo2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "T\u00f3th P\u00e9ter",
+        "username": "peter.toth",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Peter2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Nagy Ildiko",
+        "username": "ildiko.nagy",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Ildiko2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Csiki Bal\u00e1zs",
+        "username": "balazs.csiki",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Balazs2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Somogyi Edit",
+        "username": "edit.somogyi",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Edit2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Mohai Norbert",
+        "username": "norbert.mohai",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Norbert2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "T\u00f3th G\u00e1bor",
+        "username": "gabor.toth",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Gabor2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Szaller Fatime",
+        "username": "fatime.szaller",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Fatime2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Berkes J\u00e1nos P\u00e9tern\u00e9",
+        "username": "peterne.berkes",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Peterne2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Sz\u00edj\u00e1rt\u00f3 Zsolti",
+        "username": "zsolt.szijarto",
+        "supervisor": "laszlo.schreiner",
+        "organization": "QA-HSE",
+        "password": "Zsolt2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Silingi \u00c1.",
+        "username": "akos.silingi",
+        "supervisor": "balazs.kallai",
+        "organization": "logistics",
+        "password": "Akos2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Magos Judit",
+        "username": "judit.magos",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Judit2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "K\u00f6ncz\u00f6l \u00e1gnes",
+        "username": "agnes.konczol",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Agnes2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Tarl\u00f3si \u00c9va",
+        "username": "eva.tarlosi",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Eva2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Benke Gabriella",
+        "username": "gabriella.benke",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Gabriella2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Juh\u00e1sz Em\u0151ke",
+        "username": "emoke.juhasz",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Emoke2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Gy\u00f6ngy\u00f6si Be\u00e1ta",
+        "username": "beata.gyongyosi",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Beata2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Nagyn\u00e9 Csizmadia Zsuzsanna",
+        "username": "zsuzsanna.nagyne",
+        "supervisor": "akos.silingi",
+        "organization": "logistics",
+        "password": "Zsuzsanna2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Horv\u00e1th \u00c1brah\u00e1m Georgina",
+        "username": "georgina.horvath",
+        "supervisor": "balazs.kallai",
+        "organization": "finance",
+        "password": "Georgina2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Rafaj Zsuzsanna",
+        "username": "zsuzsanna.rafaj",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Zsuzsanna2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Stenger Nikoletta",
+        "username": "nikoletta.stenger",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Nikoletta2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Bodri Szilvia",
+        "username": "szilvia.bodri",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Szilvia2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Szab\u00f3 Ferenc",
+        "username": "ferenc.szabo",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Ferenc2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Szij\u00e1rt\u00f3 Szilvia",
+        "username": "szilvia.szijarto",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Szilvia2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Geiger Norbert",
+        "username": "norbert.geiger",
+        "supervisor": "georgina.horvath",
+        "organization": "finance",
+        "password": "Norbert2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "J\u00f3zsa Zs.",
+        "username": "zsofia.jozsa",
+        "supervisor": "balazs.kallai",
+        "organization": "hr",
+        "password": "Zsofia2015",
+        "role": "admin",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Kocsis Eszter",
+        "username": "eszter.kocsis",
+        "supervisor": "zsofia.jozsa",
+        "organization": "hr",
+        "password": "Eszter2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Cs\u00e1sz\u00e1rn\u00e9 S\u00e1fi\u00e1n Gabriella",
+        "username": "gabriella.csaszarne",
+        "supervisor": "zsofia.jozsa",
+        "organization": "hr",
+        "password": "Gabriella2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Tak\u00e1csn\u00e9 L\u00e1szl\u00f3n\u00e9 Magdolna",
+        "username": "magdolna.takacsne",
+        "supervisor": "zsofia.jozsa",
+        "organization": "hr",
+        "password": "Magdolna2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    },
+    {
+        "name": "Tandari J\u00f3zsefn\u00e9 T\u00fcnde",
+        "username": "tunde.tandari",
+        "supervisor": "zsofia.jozsa",
+        "organization": "hr",
+        "password": "Tunde2015",
+        "role": "user",
+        "defaultlang": "hu",
+        "defaultbar": "ka-blue"
+    }
+]

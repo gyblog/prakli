@@ -1,0 +1,26 @@
+  <div class="fixed fullHeight fullWidth" layout="row" layout-align="center center">
+    <!--<div flex-gt-md="20" flex-md="25" flex-sm="33" flex-xs="50" ng-repeat="l in _login.colors">
+      <md-toolbar md-theme="{{l}}" style="cursor:pointer" layout-padding ng-click="_login.changeThemeTo(l)">
+        <h6 style="text-transform: uppercase;text-align:center;">{{l}}</h6>
+      </md-toolbar>
+    </div>-->
+    <div class="md-whiteframe-2dp whiteBack" flex-gt-md="20" flex-xs="80" flex-sm="50" flex-md="33">
+      <md-toolbar>
+        <span style="padding:20px;"><md-icon class="material-icons">lock_open</md-icon> {{lng.login}}</span>
+      </md-toolbar>
+      <div layout="column" layout-padding>
+        <div ng-show="_login.error.message" class="error">{{_login.error.message}}</div>
+        <md-input-container class="md-block">
+          <label>{{lng.Username}}</label>
+          <input type="text" ng-model="_login.user.username">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>{{lng.Password}}</label>
+          <input type="password" ng-model="_login.user.password">
+        </md-input-container>
+        <md-input-container flex layout="row" layout-align="center center">
+          <md-button class="md-fab md-warn" ng-disabled="!_login.user.password || !_login.user.username" ng-click="_login.authenticate()"><md-icon class="material-icons">check</md-icon></md-button>
+        </md-input-container>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,40 @@
+<md-dialog aria-label="New Task" style="max-width:500px;width:80%">
+  <from>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><span>{{tag}}</span></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column">
+        <md-input-container aria-label="Title"><label>{{lng.Project}}</label><input type="text" readonly ng-model="newtask.title"></md-input-container>
+        <md-input-container aria-label="Problem"><label>{{lng.Problem}}</label><textarea columns="1" rows="5" md-maxlength="200" ng-model="newtask.problem" ng-required="true"></textarea></md-input-container>
+        <md-input-container aria-label="Action"><label>{{lng.Action}}</label><textarea columns="1" rows="5" md-maxlength="200" ng-model="newtask.action" ng-required="true"></textarea></md-input-container>
+        <br>
+        <md-datepicker flex ng-model="newtask.duedate" md-placeholder="Enter date" md-date-filter="onlyWeekdays" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+        <br>
+        <md-input-container style="margin-right: 10px;" class="md-block">
+          <label>{{lng.Affecting}}</label>
+          <md-select ng-model="newtask.affecting" aria-label="Affecting" multiple="true">
+            <md-option ng-repeat="affect in affects" value="{{affect}}">{{affect}}</md-option>
+          </md-select>
+        </md-input-container>
+        <br>
+        <md-input-container style="margin-right: 10px;" class="md-block">
+          <label>{{lng.Responsible}}</label>
+          <md-select ng-model="newtask.responsible" aria-label="Responsible" required>
+            <md-option ng-repeat="user in users" value="{{user.username}}">{{user.name}}</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-disabled="!newtask.problem || !newtask.action || !newtask.duedate || !newtask.responsible" ng-click="answer(newtask)">{{lng.SAVE}}</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
