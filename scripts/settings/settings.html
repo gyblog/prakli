@@ -40,7 +40,6 @@
           {{lng.SAVE}}
         </md-button>
       </div>
-<<<<<<< HEAD
       <md-divider></md-divider>
       <h3>{{lng.EmailFreq}}</h3>
       <div layout="row">
@@ -58,11 +57,6 @@
   </md-tab>
   <md-tab label="{{lng.Type}}" ng-disabled="_settings.currentuser.role!='admin'">
     <md-content layout-padding style="margin: 0 auto; max-width: 600px">
-=======
-    </md-list-item>
-    <md-divider></md-divider>
-    <md-list-item layout="column" ng-show="_settings.currentuser.role=='admin'">
->>>>>>> 04c11efe0fe07c8fd97db983306de379c3170504
       <h3>{{lng.Type}}</h3>
       <div layout="column">
         <md-input-container ng-repeat="type in types track by $index" style="" aria-label="Types">
@@ -82,16 +76,10 @@
           {{lng.SAVE}}
         </md-button>
       </div>
-<<<<<<< HEAD
     </md-content>
   </md-tab>
   <md-tab label="{{lng.Employees}}" ng-disabled="_settings.currentuser.role!='admin'">
     <md-content layout-padding>
-=======
-    </md-list-item>
-    <md-divider ng-show="_settings.currentuser.role=='admin'"></md-divider>
-    <md-list-item>
->>>>>>> 04c11efe0fe07c8fd97db983306de379c3170504
       <h3 flex>{{lng.Employees}}</h3>
       <div layout="column" ng-show="_settings.newUser" style="margin:0 auto;max-width: 400px">
         <md-toolbar>
@@ -155,7 +143,6 @@
           <md-icon class="material-icons">control_point</md-icon>
         </md-button>
       </div>
-<<<<<<< HEAD
       <md-list>
         <md-list-item layout="row" ng-repeat="emp in users | filter:{'supervisor': _settings.currentuser.username, 'name': searchText} | orderBy:'name' track by $index"
         style="border-bottom:1px solid rgb(230,231,232);font-size:.8em;">
@@ -196,8 +183,3 @@
     </md-content>
   </md-tab>
 </md-tabs>
-=======
-    </md-list-item>
-  </md-list>
-</md-content>
->>>>>>> 04c11efe0fe07c8fd97db983306de379c3170504
