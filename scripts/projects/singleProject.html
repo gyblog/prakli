@@ -50,7 +50,7 @@
     <md-button class="md-fab md-primary" ng-click="_singleProject.newTask($event)" ng-show="_singleProject.pr.owner == _singleProject.currentuser.username">
       <md-icon class="material-icon">control_point</md-icon>
     </md-button>
-    <md-button class="" ng-click="_singleProject.showOnlyActive()">
+    <md-button class="" ng-click="_singleProject.showmod=!_singleProject.showmod;">
       <md-icon class="material-icon">filter_list</md-icon> {{lng.ShowInactive}}</md-button>
   </div>
   <md-list flex="100" class="whiteBack" style="margin-top:-10px;">
@@ -63,7 +63,7 @@
       <span flex-xs="33" flex-sm="33" flex-gt-sm="10" style="" ng-click="sortType='status';sortReverse=!sortReverse">{{lng.Status}}</span>
     </md-list-item>
     <md-list-item layout="column" ng-class="{'viewer':task.status=='Closed', 'participant':task.status=='Pending', 'rejected': task.status=='Rejected'}"
-    style="border-bottom:1px solid #e7e7e7;" ng-repeat="task in _singleProject.pr.tasks | filter:_singleProject.act | orderBy:sortType:sortReverse track by $index"
+    style="border-bottom:1px solid #e7e7e7;" ng-repeat="task in _singleProject.pr.tasks | orderBy:sortType:sortReverse track by $index"
     ng-class="{'notA': task.active == 0}" ui-sref="home.singleTask({projectID:_singleProject.pr.id, taskID: task.id})">
       <div flex="100" layout="row" layout-wrap layout-align="center center">
         <span flex-xs="100" flex-sm="100" flex-gt-sm style="white-space:pre-wrap; color: rgb(3,63,136);padding:10px;">{{task.problem}}</span>
@@ -75,13 +75,13 @@
           <md-progress-circular ng-if="task.status != 'Closed'" class="md-primary" md-theme-watch md-theme="{{_singleProject.setStatus(task)}}" md-mode="determinate" md-diameter="40" value="{{_singleProject.taskStatuses[task.status]}}"></md-progress-circular>
           <i ng-if="task.status == 'Closed'" style="position:relative;">{{lng[task.status]}}<br>{{task.closedon | date: 'yyyy-MM-dd'}}</i>
         </span>
-        <b flex="100" ng-show="!_singleProject.act.active && task.modified">{{lng.Modifications}}:</b>
-        <div flex="100" layout="column" ng-show="!_singleProject.act.active && task.modified" style="font-size:0.8em;line-height:20px;border-bottom: 1px solid rgb(200,200,200);" ng-repeat="mod in task.modified track by $index">
+        <b flex="100" ng-show="_singleProject.showmod && task.modified.length > 0">{{lng.Modifications}}:</b>
+        <div flex="100" layout="column" ng-show="_singleProject.showmod && task.modified.length > 0" style="font-size:0.8em;line-height:20px;border-bottom: 1px solid rgb(200,200,200);" ng-repeat="mod in task.modified track by $index">
           <i>{{$index + 1}}. {{lng.Modifiedon}}: {{mod.on | date: 'yyyy-MM-dd HH:mm'}}</i>
           <span> {{lng.From}}:
-            <br> {{lng.Responsible}}: <b>{{mod.from.responsible}}</b>
-            <br> {{lng.Duedate}}: <b>{{mod.from.duedate | date: 'yyyy-MM-dd'}}</b>
-            <br> {{lng.Status}}: <b>{{mod.from.status}}</b>
+            <br> {{lng.Responsible}}: <b>{{mod.responsible}}</b>
+            <br> {{lng.Duedate}}: <b>{{mod.duedate | date: 'yyyy-MM-dd'}}</b>
+            <br> {{lng.Status}}: <b>{{mod.status}}</b>
           </span>
         </div>
       </div>

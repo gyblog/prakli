@@ -12,8 +12,8 @@
     <md-dialog-content>
       <div class="md-dialog-content" layout="column">
         <md-input-container aria-label="Title"><label>{{lng.Project}}</label><input type="text" readonly ng-model="newtask.title"></md-input-container>
-        <md-input-container aria-label="Problem"><label>{{lng.Problem}}</label><textarea columns="1" rows="5" md-maxlength="200" ng-model="newtask.problem" ng-required="true"></textarea></md-input-container>
-        <md-input-container aria-label="Action"><label>{{lng.Action}}</label><textarea columns="1" rows="5" md-maxlength="200" ng-model="newtask.action" ng-required="true"></textarea></md-input-container>
+        <md-input-container aria-label="Problem"><label>{{lng.Problem}}</label><textarea columns="1" rows="5" md-maxlength="500" ng-model="newtask.problem" ng-required="true"></textarea></md-input-container>
+        <md-input-container aria-label="Action"><label>{{lng.Action}}</label><textarea columns="1" rows="5" md-maxlength="500" ng-model="newtask.action" ng-required="true"></textarea></md-input-container>
         <br>
         <md-datepicker flex ng-model="newtask.duedate" md-placeholder="Enter date" md-date-filter="onlyWeekdays" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
         <br>
@@ -27,9 +27,10 @@
         <md-input-container style="margin-right: 10px;" class="md-block">
           <label>{{lng.Responsible}}</label>
           <md-select ng-model="newtask.responsible" aria-label="Responsible" required>
-            <md-option ng-repeat="user in users" value="{{user.username}}">{{user.name}}</md-option>
+            <md-option ng-repeat="user in users | orderBy:'name'" value="{{user.username}}">{{user.name}}</md-option>
           </md-select>
         </md-input-container>
+        <md-input-container aria-label="Comment"><label>{{lng.Comment}}</label><textarea columns="1" rows="5" md-maxlength="500" ng-model="newtask.comment"></textarea></md-input-container>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">

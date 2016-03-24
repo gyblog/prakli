@@ -21,7 +21,7 @@
   <md-list-item layout="row" style="background-color:#373737;color:white;" class="md-title">
     <span flex ng-click="sortType='title';sortReverse=!sortReverse">{{lng.Subject}}</span>
     <span flex="50" flex-xs="100" flex-sm="100" style="white-space:pre-wrap;">{{lng.Message}}</span>
-    <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{lng.Sender}}</span>
+    <span flex="20" style="overflow:hidden;text-overflow:ellipsis" ng-click="sortType='sender';sortReverse=!sortReverse">{{lng.Sender}}</span>
     <span hide-xs hide-sm flex="10" ng-click="sortType='duedate';sortReverse=!sortReverse" flex-xs="30" flex-sm="20">{{lng.Senton}}</span>
     <span flex>{{lng.Operations}}</span>
   </md-list-item>
@@ -30,19 +30,13 @@
     <span flex ng-click="sortType='title';sortReverse=!sortReverse" style="padding-left:5px">{{message.title}}</span>
     <span flex="50" style="white-space:pre-wrap;padding-left: 10px;">{{message.text}}</span>
     <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':message.sender})[0].name }}</span>
-    <span hide-xs hide-sm flex="10" ng-click="sortType='duedate';sortReverse=!sortReverse" flex-xs="30" flex-sm="20">{{message.senton | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    <span hide-xs hide-sm flex="10" flex-xs="30" flex-sm="20">{{message.senton | date:'yyyy-MM-dd HH:mm:ss'}}</span>
     <span flex>
     <md-menu md-position-mode="target-right target">
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
             <md-icon md-menu-origin md-class="material-icons">more_vertical</md-icon>
           </md-button>
           <md-menu-content width="4">
-            <!--<md-menu-item ng-repeat="item in [1, 2, 3]">
-              <md-button ng-click="ctrl.announceClick($index)">
-                <md-icon md-menu-align-target md-svg-icon="call:no-sim"></md-icon>
-                Option {{item}}
-              </md-button>
-            </md-menu-item>-->
             <md-menu-item ng-click="_messages.replyMessage($event, message)">
               <md-button>
                 <div layout="row">

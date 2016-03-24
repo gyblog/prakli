@@ -8,10 +8,10 @@
           </div>
         </h2>
 </md-toolbar>
-<md-content>
 
-  <md-list ng-show="(users | filter:{'supervisor':_settings.currentuser.username}).length > 0">
-    <md-list-item layout="column">
+<md-tabs md-dynamic-height md-border-bottom class="md-accent">
+  <md-tab label="{{lng.Settings}}">
+    <md-content layout-padding>
       <h3>{{lng.Owned}} {{lng.Password}} {{lng.EDIT}}</h3>
       <div layout="row">
         <md-input-container style="position:relative;top:10px;">
@@ -28,9 +28,7 @@
         </md-button>
       </div>
       <p ng-show="_settings.message">{{_settings.message}}</p>
-    </md-list-item>
-    <md-divider></md-divider>
-    <md-list-item layout="column">
+      <md-divider></md-divider>
       <h3>{{lng.Language}}</h3>
       <div layout="row">
         <md-radio-group ng-model="_settings.currentuser.defaultlang" ng-click="_settings.changeLanguage()">
@@ -42,47 +40,146 @@
           {{lng.SAVE}}
         </md-button>
       </div>
-    </md-list-item>
-    <md-divider></md-divider>
-    <md-list-item layout="column" ng-show="vm.currentuser.role=='admin'">
+      <md-divider></md-divider>
+      <h3>{{lng.EmailFreq}}</h3>
+      <div layout="row">
+        <md-radio-group ng-model="_settings.currentuser.emailfreqvency" ng-click="_settings.changeEmailFreq()">
+          <md-radio-button value="da" class="md-warn"> {{lng.Daily}} </md-radio-button>
+          <md-radio-button value="wk" class="md-primary"> {{lng.Weekly}} </md-radio-button>
+          <md-radio-button value="mo" class="md-warn"> {{lng.Monthly}} </md-radio-button>
+        </md-radio-group>
+        <md-button ng-click="_settings.saveUsersettings()">
+          <md-icon class="material-icons">save</md-icon>
+          {{lng.SAVE}}
+        </md-button>
+      </div>
+    </md-content>
+  </md-tab>
+  <md-tab label="{{lng.Type}}" ng-disabled="_settings.currentuser.role!='admin'">
+    <md-content layout-padding style="margin: 0 auto; max-width: 600px">
       <h3>{{lng.Type}}</h3>
       <div layout="column">
-        <md-input-container ng-repeat="type in types track by $index" style="">
-          <input type="text" ng-model="types[$index]" value="{{type}}">
+        <md-input-container ng-repeat="type in types track by $index" style="" aria-label="Types">
+          <input type="text" ng-model="types[$index]" value="{{type}}" aria-label="Types">
         </md-input-container>
         <div style="background-color: rgb(250,250,255);padding: 10px;">
-        <md-input-container>
-          <label>{{lng.New}} {{lng.Type}}</label>
-          <input type="text" ng-model="_settings.newType">
-        </md-input-container>
-        <md-button ng-disabled="!_settings.newType" ng-click="types.push(_settings.newType)">
-          <md-icon class="material-icons">control_point</md-icon>
-        </md-button>
+          <md-input-container>
+            <label>{{lng.New}} {{lng.Type}}</label>
+            <input type="text" ng-model="_settings.newType">
+          </md-input-container>
+          <md-button ng-disabled="!_settings.newType" ng-click="types.push(_settings.newType)">
+            <md-icon class="material-icons">control_point</md-icon>
+          </md-button>
         </div>
         <md-button ng-click="_settings.saveTypes()">
           <md-icon class="material-icons">save</md-icon>
           {{lng.SAVE}}
         </md-button>
       </div>
-    </md-list-item>
-    <md-divider ng-show="vm.currentuser.role=='admin'"></md-divider>
-    <md-list-item>
+    </md-content>
+  </md-tab>
+  <md-tab label="{{lng.Employees}}" ng-disabled="_settings.currentuser.role!='admin'">
+    <md-content layout-padding>
       <h3 flex>{{lng.Employees}}</h3>
-      <md-input-container style="position:relative;top:10px;">
-        <label>Keresés név szerint</label>
-        <input type="text" ng-model="searchText">
-      </md-input-container>
-    </md-list-item>
-    <md-list-item layout="row" ng-repeat="emp in users | filter:{'supervisor': _settings.currentuser.username, 'name': searchText} | orderBy:'name' track by $index"
-    style="border-bottom:1px solid rgb(230,231,232);font-size:.8em;">
-      <div flex>
-        <h3>{{emp.name}}</h3>
-        <p>{{emp.organization | uppercase}}</p>
+      <div layout="column" ng-show="_settings.newUser" style="margin:0 auto;max-width: 400px">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h4>{{lng.New}} {{lng.User}}</h4>
+          </div>
+        </md-toolbar>
+        <md-content layout="column">
+          <md-input-container style="margin-bottom: 0">
+            <label>{{lng.Name}}</label>
+            <input name="name" ng-model="_settings.new.name">
+          </md-input-container>
+          <md-input-container style="margin-bottom: 0">
+            <label>{{lng.Username}}</label>
+            <input name="username" ng-model="_settings.new.username">
+          </md-input-container>
+          <md-input-container style="margin-bottom: 0">
+            <label>{{lng.Password}}</label>
+            <input name="password" ng-model="_settings.new.password">
+          </md-input-container>
+          <span>{{lng.Role}}</span>
+          <md-radio-group layout ng-model="_settings.new.role">
+            <md-radio-button flex value="employee" class="md-primary"> {{lng.Employee}} </md-radio-button>
+            <md-radio-button flex value="admin" class="md-warn"> {{lng.Admin}} </md-radio-button>
+          </md-radio-group>
+          <div layout="row">
+            <md-input-container flex>
+              <label>{{lng.Organization}}</label>
+              <md-select name="organization" ng-model="_settings.new.organization">
+                <md-option ng-repeat="orgs in users | unique:'organization' | orderBy:'organization' track by $index" value="{{orgs.organization}}"
+                ng-if="orgs.organization && (_settings.deforg && _settings.deforg != '' && _settings.deforg == orgs.organization) || _settings.deforg == ''">{{orgs.organization | uppercase}}</md-option>
+              </md-select>
+            </md-input-container>
+            <md-button ng-click="_settings.neworg=!_settings.neworg">
+              {{lng.New}} {{lng.Organization}}
+            </md-button>
+          </div>
+          <md-input-container ng-show="_settings.neworg">
+            <label>{{lng.Organization}}</label>
+            <input name="organization" ng-model="_settings.new.organization">
+          </md-input-container>
+          <md-divider></md-divider>
+          <div layout>
+            <md-button class="md-warn md-raised" ng-click="_settings.new = {}; _settings.neworg=false; _settings.newUser = false">
+              <md-icon class="material-icons">cancel</md-icon> {{lng.Cancel}}
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="_settings.saveNewUser()" ng-disabled="!_settings.new.role || !_settings.new.name || (!_settings.new.password && _settings.edit == false) || !_settings.new.organization || !_settings.new.username">
+              <md-icon class="material-icons">save</md-icon> {{lng.SAVE}}
+            </md-button>
+          </div>
+        </md-content>
       </div>
-      <div flex>
-        {{lng.Projects}}: <b>{{_settings.projectCount(emp.username)}}</b>
-        <br> {{lng.Tasks}}: <b>{{_settings.taskCount(emp.username)}}</b>
+      <div layout>
+        <md-input-container style="position:relative;top:10px;">
+          <label>Keresés név szerint</label>
+          <input type="text" ng-model="searchText">
+        </md-input-container>
+        <span flex></span>
+        <md-button class="md-icon-button md-raised md-primary" aria-lable="Add new User" ng-click="_settings.newUser=!_settings.newUser"
+        ng-show="!_settings.newUser">
+          <md-icon class="material-icons">control_point</md-icon>
+        </md-button>
       </div>
-    </md-list-item>
-  </md-list>
-</md-content>
+      <md-list>
+        <md-list-item layout="row" ng-repeat="emp in users | filter:{'supervisor': _settings.currentuser.username, 'name': searchText} | orderBy:'name' track by $index"
+        style="border-bottom:1px solid rgb(230,231,232);font-size:.8em;">
+          <div flex>
+            <h3>{{emp.name}}</h3>
+            <p>{{emp.organization | uppercase}}</p>
+          </div>
+          <div flex>
+            {{lng.Projects}}: <b>{{emp.projects}}</b>
+            <br> {{lng.Tasks}}: <b>{{emp.tasks}}</b>
+          </div>
+          <div>
+            <md-button class="md-primary md-icon-button" ng-click="_settings.editUser(emp)">
+              <md-icon class="material-icons">edit</md-icon>
+            </md-button>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </md-tab>
+  <md-tab label="{{lng.Reports}}" ng-disabled="_settings.currentuser.role!='admin'">
+    <md-content layout-padding style="max-width: 600px;margin: 0 auto">
+      <h3>{{lng.Project}} {{lng.Type}}</h3>
+      <nvd3 style="background-color:white;margin: 0 auto;max-width: 400px;" options="_settings.projectChart.options" data="_settings.projectChart.data"></nvd3>
+      <md-divider></md-divider>
+      <h3>{{lng.Organization}} {{lng.Projects}}</h3>
+      <nvd3 style="background-color:white;margin: 0 auto;max-width: 400px;" options="_settings.organizationChart.options" data="_settings.organizationChart.data"></nvd3>
+      <md-divider></md-divider>
+      <h3>TOP 10 {{lng.User}}</h3>
+      <h4>{{lng.Projects}}</h4>
+      <nvd3 style="background-color:white;margin: 0 auto;max-width: 400px;" options="_settings.userChart.options" data="_settings.userChart.data"></nvd3>
+      <h4>{{lng.Tasks}}</h4>
+      <nvd3 style="background-color:white;margin: 0 auto;max-width: 400px;" options="_settings.userTaskChart.options" data="_settings.userTaskChart.data"></nvd3>
+      <md-divider></md-divider>
+      <h3>{{lng.Users}}</h3>
+      <nvd3 style="background-color:white;margin: 0 auto;max-wdith: 400px;" options="_settings.employeeChart.options" data="_settings.employeeChart.data"></nvd3>
+      <md-divider></md-divider>
+    </md-content>
+  </md-tab>
+</md-tabs>

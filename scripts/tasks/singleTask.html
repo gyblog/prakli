@@ -26,13 +26,15 @@
       <dd>{{(users | filter:{'username':_singleTask.task.responsible})[0].name}}</dd>
       <dt>{{lng.Affecting}}</dt>
       <dd>{{_singleTask.task.affecting}}</dd>
+      <dt>{{lng.Comment}}</dt>
+      <dd>{{_singleTask.task.comment}}</dd>
     </dl>
   </div>
   <div flex-gt-sm="30" flex-xs="100" flex-sm="40" layout-padding layout-align="center center" style="width:200px;margin:0 auto">
     <md-button ng-click="_singleTask.task.status = _singleTask.advanceStatus(_singleTask.task.status);">
       <md-progress-circular md-theme-watch md-theme="{{_singleTask.st[_singleTask.timer]}}" class="md-primary" md-mode="determinate"
       md-diameter="200" value="{{_singleTask.statuses[_singleTask.task.status]}}"></md-progress-circular>
-      <i style="position:absolute;margin:-120px 0 0 -95px;font-size:2em;width:200px;text-align:center;z-index:100;">{{lng[_singleTask.task.status]}} <br><small style="font-size:10pt">{{_singleTask.task.closedon | date:'yyyy-MM-dd'}}</small></i>
+      <i style="position:absolute;margin:-120px 0 0 -95px;font-size:2em;width:200px;text-align:center;z-index:100;">{{lng[_singleTask.task.status]}} <br><small style="font-size:10pt" ng-show="_singleTask.task.closedon">{{_singleTask.task.closedon | date:'yyyy-MM-dd'}}</small></i>
     </md-button>
   </div>
   <div flex="100" layout layout-align="center center">
@@ -42,6 +44,8 @@
       <md-icon class="material-icon">save</md-icon> {{lng.SAVE}}</md-button>
     <md-button class="md-primary" ng-click="_singleTask.edit($event, _singleTask.task)" ng-show="(_singleTask.thisProject.owner == _singleTask.currentuser.username && (_singleTask.task.status != 'Pending' || _singleTask.task.status != 'Rejected'))">
       <md-icon class="material-icon">edit</md-icon> {{lng.EDIT}}</md-button>
+      <md-button class="md-primary" ng-click="_singleTask.duplicate($event, _singleTask.task)" ng-show="(_singleTask.thisProject.owner == _singleTask.currentuser.username && (_singleTask.task.status != 'Pending' || _singleTask.task.status != 'Rejected'))">
+      <md-icon class="material-icon">content_copy</md-icon> {{lng.DUPLICATE}}</md-button>
     <md-button class="md-warn" ng-click="_singleTask.newMessage($event, _singleTask.task)" ng-show="_singleTask.task.responsible == _singleTask.currentuser.username && _singleTask.task.status == 'Pending'">
       <md-icon class="material-icon">assignment_return</md-icon> {{lng.Reject}}</md-button>
   </div>
@@ -52,9 +56,9 @@
   ng-repeat="mod in _singleTask.task.modified | orderBy:'on':true track by $index">
     <i>{{lng.Modifiedon}}: {{mod.on | date: 'yyyy-MM-dd HH:mm'}}</i>
     <span style="padding-left:20px"> {{lng.From}}:
-            <br> {{lng.Responsible}}: <b>{{mod.from.responsible}}</b>
-            <br> {{lng.Duedate}}: <b>{{mod.from.duedate | date: 'yyyy-MM-dd'}}</b>
-            <br> {{lng.Status}}: <b>{{mod.from.status}}</b>
+            <br> {{lng.Responsible}}: <b>{{mod.responsible}}</b>
+            <br> {{lng.Duedate}}: <b>{{mod.duedate | date: 'yyyy-MM-dd'}}</b>
+            <br> {{lng.Status}}: <b>{{mod.status}}</b>
           </span>
   </div>
   </div>

@@ -101,14 +101,14 @@
      <md-card-title>
       <md-card-title-text>
         <span class="md-headline" layout><span flex>{{lng.Owned}} {{lng.Messages}}</span>
-        <md-button class="md-icon-button" ng-show="messages.length > 0">{{(messages | filter:{'read':0}).length}}</md-button>
+        <md-button class="md-icon-button" ng-show="messages.length > 0">{{messages.length}}</md-button>
         </span>
         <span class="md-subhead">{{lng.UnreadMessages}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
       <md-list>
-        <md-list-item class="secondary-button-padding" ng-repeat="message in messages | orderBy:'senton' | filter:{'recipient': _dash.currentuser.username, 'read':0} | limitTo:5 track by $index"
+        <md-list-item class="secondary-button-padding" ng-repeat="message in messages | orderBy:'senton' | filter:{'recipient': _dash.currentuser.username} | limitTo:5 track by $index"
         ui-sref="home.messages">
           <span flex style="line-height:20px;border-bottom:1px solid rgb(230,231,232);padding-top:10px;">
             <span class="{{message.title.indexOf('Visszautasítás') > -1 || message.title.indexOf('Reject') > -1 ? 'red':'blue'}}">{{message.title}}</span><br>

@@ -6,8 +6,12 @@
           <strong flex>{{lng.Projects}}</strong>
           <div>
           <md-input-container md-theme="kaLightGrey" style="position:relative;top:10px; color:white;">
+            <label style="color:rgba(255,255,255,.4)">Keresés típus szerint</label>
+            <input type="text" ng-model="searchText.type" style="color:white">
+          </md-input-container>
+          <md-input-container md-theme="kaLightGrey" style="position:relative;top:10px; color:white;">
             <label style="color:rgba(255,255,255,.4)">Keresés a címben</label>
-            <input type="text" ng-model="searchText">
+            <input type="text" ng-model="searchText.title" style="color:white">
           </md-input-container>
           </div>
         </h2>
@@ -15,6 +19,7 @@
 <md-list flex class="whiteBack" style="margin-top:-10px;">
   <md-list-item layout="row" style="background-color:#373737;color:white;" class="md-title">
     <span flex ng-click="sortType='title';sortReverse=!sortReverse">{{lng.Title}}</span>
+    <span flex ng-click="sortType='title';sortReverse=!sortReverse">{{lng.Type}}</span>
     <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{lng.Description}}</span>
     <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{lng.Owner}}</span>
     <span flex="10" ng-click="sortType='duedate';sortReverse=!sortReverse" flex-xs="30" flex-sm="20">{{lng.Duedate}}</span>
@@ -22,8 +27,9 @@
   </md-list-item>
   <md-divider></md-divider>
   <md-subheader>{{lng.Owned}}</md-subheader>
-  <md-list-item ng-repeat="project in projects | orderBy:sortType:sortReverse | filter:{'owner':_projects.currentuser.username, 'title':searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
+  <md-list-item ng-repeat="project in projects | orderBy:sortType:sortReverse | filter:{'owner':_projects.currentuser.username} | filter: searchText track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
     <span flex class="md-primary md-block">{{project.title}}</span>
+    <span flex class="md-primary md-block">{{project.type}}</span>
     <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
     <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
     <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
@@ -36,6 +42,7 @@
   <md-subheader>{{lng.Participant}}</md-subheader>
   <md-list-item class="participant" ng-repeat="project in _projects.participant() | filter:{'title': searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
     <span flex class="md-primary md-block">{{project.title}}</span>
+    <span flex class="md-primary md-block">{{project.type}}</span>
     <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
     <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
     <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
@@ -48,6 +55,7 @@
   <md-subheader>{{lng.Attendee}}</md-subheader>
   <md-list-item class="viewer" ng-repeat="project in _projects.viewer() | filter:{'title': searchText} track by $index" layout="row" ui-sref="home.singleProject({projectID:project.id})">
     <span flex class="md-primary md-block">{{project.title}}</span>
+    <span flex class="md-primary md-block">{{project.type}}</span>
     <span hide-sm hide-xs flex="40" style="white-space:pre-wrap;">{{project.description}}</span>
     <span flex="20" style="overflow:hidden;text-overflow:ellipsis">{{ (users | filter:{'username':project.owner})[0].name }}</span>
     <span flex="10" flex-xs="30" flex-sm="20">{{project.duedate | date:'yyyy-MM-dd'}}</span>
