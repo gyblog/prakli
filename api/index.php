@@ -1,5 +1,4 @@
 <?php
-
 // INIT app
 $app = require('lib/base.php');
 

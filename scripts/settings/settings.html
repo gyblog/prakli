@@ -113,7 +113,7 @@
                 ng-if="orgs.organization && (_settings.deforg && _settings.deforg != '' && _settings.deforg == orgs.organization) || _settings.deforg == ''">{{orgs.organization | uppercase}}</md-option>
               </md-select>
             </md-input-container>
-            <md-button ng-click="_settings.neworg=!_settings.neworg">
+            <md-button ng-click="_settings.neworg=!_settings.neworg" ng-show="_settings.deforg == ''">
               {{lng.New}} {{lng.Organization}}
             </md-button>
           </div>

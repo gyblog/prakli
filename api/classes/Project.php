@@ -102,7 +102,7 @@ Class Project {
    echo json_encode($result);
  }
  function getTypes(){
-  $c = $this->d->exec('select COUNT(id) as PC, if(type,type,\'NINCS\') as type from projects group by type');
+  $c = $this->d->exec('select COUNT(id) as PC, if(type!=\'\',type,\'NINCS\') as type from projects group by type');
    $result = [];
    foreach($c as $k=>$v){
      $res = [];
